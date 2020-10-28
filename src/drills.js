@@ -33,3 +33,18 @@ function pagination(pageNumber){
 }
 
 //pagination(2);
+
+function addedDaysFrom(daysAgo){
+    knexInstance
+        .select('id', 'name', 'price', 'date_added', 'checked', 'category')
+        .from('shopping_list')
+        .where('date_added', 
+            '<',
+             knexInstance.raw(`now() - '?? days' ::INTERVAL`, daysAgo)
+        )
+        .then(result => {
+            console.log(result);
+        })
+}
+
+addedDaysFrom(7);
