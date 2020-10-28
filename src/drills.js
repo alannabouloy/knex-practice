@@ -47,4 +47,17 @@ function addedDaysFrom(daysAgo){
         })
 }
 
-addedDaysFrom(7);
+//addedDaysFrom(7);
+
+function totalPriceForEachCategory(){
+    knexInstance
+        .select('category')
+        .from('shopping_list')
+        .sum('price AS total_price')
+        .groupBy('category')
+        .then(result => {
+            console.log(result)
+        });
+}
+
+totalPriceForEachCategory();
